@@ -7,9 +7,12 @@ __global__ void redMatMultOnGpu(int *a, int *b, int *c, int N) {
     int rowIndexOfC = blockIdx.x * blockDim.x + threadIdx.x;
     int colIndexOfC = blockIdx.y * blockDim.y + threadIdx.y;
 
+    //Each element in RMM is computed from two rows of A and two columns of B.
+    //here we get the two rows for the current thread.
     int row1OfA = rowIndexOfC*2;
     int row2OfA = row1OfA + 1;
 
+    //here we get two columns for the current thread.
     int col1OfB = colIndexOfC*2;
     int col2OfB = col1OfB+1;
 
@@ -50,6 +53,8 @@ void gpuThread(int N, int *matA, int *matB, int *output)
 
     int sizeOfBlock = 16;
 
+    //With the following configuration we are going to create total of (N*N/4) threads.
+    //each thread will ultimately compute on element of the ouput matrix.
     dim3 threadsPerBlock(sizeOfBlock,sizeOfBlock);
 
     int numberOfBlocks = (N>>1)/16;
