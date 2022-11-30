@@ -57,7 +57,7 @@ void gpuThread(int N, int *matA, int *matB, int *output)
     //each thread will ultimately compute on element of the ouput matrix.
     dim3 threadsPerBlock(sizeOfBlock,sizeOfBlock);
 
-    int numberOfBlocks = (N>>1)/16;
+    int numberOfBlocks = (N>>1)/sizeOfBlock;
     dim3 blocksPerGrid(numberOfBlocks,numberOfBlocks);
     
     redMatMultOnGpu<<<blocksPerGrid, threadsPerBlock>>>(d_a, d_b, d_c, N);
