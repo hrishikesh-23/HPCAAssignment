@@ -6,8 +6,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    int N;
-    cout<<"Inside generate"; 
+    int N; 
     if (argc < 2) 
         N = 8192;
     else 

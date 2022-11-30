@@ -12,6 +12,7 @@
         "unordered_map": "cpp",
         "tuple": "cpp",
         "type_traits": "cpp",
-        "chrono": "cpp"
+        "chrono": "cpp",
+        "fstream": "cpp"
     }
 }

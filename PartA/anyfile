@@ -1,0 +1,36 @@
+Data For Un optimized reference code matrix size :16number page faults 3
+number of L1 data read misses 140732503518464
+number of LLC data read misses 140411914361360
+number of tlb misses 140728898420736
+Data For Single thread with AVX code matrix size :16number page faults 3
+number of L1 data read misses 140732503518464
+number of LLC data read misses 140411914361360
+number of tlb misses 140728898420736
+Data For Multi thread with AVX code matrix size :16number page faults 3
+number of L1 data read misses 140732503518464
+number of LLC data read misses 140411914361360
+number of tlb misses 140728898420736
+Data For Un optimized reference code matrix size :4096number page faults 3
+number of L1 data read misses 140736889848512
+number of LLC data read misses 140280127068688
+number of tlb misses 140733193388032
+Data For Single thread with AVX code matrix size :4096number page faults 3
+number of L1 data read misses 140736889848512
+number of LLC data read misses 140280127068688
+number of tlb misses 140733193388032
+Data For Multi thread with AVX code matrix size :4096number page faults 3
+number of L1 data read misses 140736889848512
+number of LLC data read misses 140280127068688
+number of tlb misses 140733193388032
+Data For Un optimized reference code matrix size :128number page faults 3
+number of L1 data read misses 140722010712064
+number of LLC data read misses 139696414734864
+number of tlb misses 140720308486144
+Data For Single thread with AVX code matrix size :128number page faults 3
+number of L1 data read misses 140722010712064
+number of LLC data read misses 139696414734864
+number of tlb misses 140720308486144
+Data For Multi thread with AVX code matrix size :128number page faults 3
+number of L1 data read misses 140722010712064
+number of LLC data read misses 139696414734864
+number of tlb misses 140720308486144

@@ -5,6 +5,9 @@
 #include <chrono>
 #include <fstream>
 #include <assert.h>
+#include <unistd.h>
+#include <signal.h>
+
 
 using namespace std;
 
@@ -84,35 +87,36 @@ int main(int argc, char *argv[])
     cout << "Reference execution time: " << 
       (double)TIME_DIFF(std::chrono::microseconds, begin, end) / 1000.0 << " ms\n";
     
-   readings_File<<msgRef; 
-  }   
- 
-  // cerr << "matA: " << endl;
-  // for(int i=0; i<(N); i++){
-  //   for(int j=0; j<N; j++){
-  //     cerr << matA[i*N+j] << "\t";
-  //   }
-  //   cerr << endl;
-  // }
-  // cerr << "matB: " << endl;
-  // for(int i=0; i<(N); i++){
-  //   for(int j=0; j<N; j++){
-  //     cerr << matB[i*N+j] << "\t";
-  //   }
-  //   cerr << endl;
-  // }
-  // cerr << "output_reference: " << endl;
-  // for(int i=0; i<(N>>1); i++){
-  //   for(int j=0; j<(N>>1); j++){
-  //     cerr << output_reference[i*(N>>1)+j] << "\t";
-  //   }
-  //   cerr << endl;
-  // } 
+  readings_File<<msgRef; 
+  } 
+  
+  //Printing matrices
+  cerr << "matA: " << endl;
+  for(int i=0; i<(N); i++){
+    for(int j=0; j<N; j++){
+      cerr << matA[i*N+j] << "\t";
+    }
+    cerr << endl;
+  }
+  cerr << "matB: " << endl;
+  for(int i=0; i<(N); i++){
+    for(int j=0; j<N; j++){
+      cerr << matB[i*N+j] << "\t";
+    }
+    cerr << endl;
+  }
+  cerr << "output_reference: " << endl;
+  for(int i=0; i<(N>>1); i++){
+    for(int j=0; j<(N>>1); j++){
+      cerr << output_reference[i*(N>>1)+j] << "\t";
+    }
+    cerr << endl;
+  } 
 
   //Execute single thread
   int *output_single = new int[(N>>1)*(N>>1)];
   begin = TIME_NOW;
-  singleThread(N, matA, matB, output_single);
+  singleThread(N, matA, matB, output_single); 
   end = TIME_NOW;
   string msg = "Single thread execution time: "+to_string((double)TIME_DIFF(std::chrono::microseconds, begin, end) / 1000.0) + " ms\n";
   cout << "Single thread execution time: " << 
@@ -136,9 +140,17 @@ int main(int argc, char *argv[])
   cout << "Multi-threaded execution time: " << 
     (double)TIME_DIFF(std::chrono::microseconds, begin, end) / 1000.0 << " ms\n";
 
+  if(N<=10000){
+    for(int i = 0; i < ((N>>1)*(N>>1)); ++i)
+    if(output_multi[i] != output_reference[i]) {
+      cout << "Mismatch at " << i << "\n";
+      exit(0);
+    }
+  }
+
   string msgMulti = "Multi thread execution time: "+to_string((double)TIME_DIFF(std::chrono::microseconds, begin, end) / 1000.0) + " ms\n";
   readings_File<<msgMulti;
   readings_File.close();
   input_file.close(); 
-  return 0; 
+  return 0;
 }

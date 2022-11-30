@@ -1,11 +1,13 @@
 #include <pthread.h>
 
-//params to pass in threads
+//Following structure is required to pass parameters to each instance of the thread.
 struct single_thread_Input
 {
-    int start_row;
-    int End_row;
+    int start_row;// corresponds to the starting row where thread should start computing
+    int End_row;// corresponds to the last row where thread should stop computing
 };
+
+//Defining the matrices to be global so that all threads can access and work on them in parallel.
 int *globalMatA;
 int *globalMatB;
 int *globalOutput;
@@ -63,10 +65,10 @@ void multiThread(int n, int *matA, int *matB, int *output)
 {
     N = n;
     int NumberOfThreads;
-    if(N<128){
+    if(N<64){
         NumberOfThreads = (N>>1);
     }else{
-        NumberOfThreads = 128;
+        NumberOfThreads = 64;
     }
     cout<<"Executing multi threaded code for matrix size : "<<N<<". Number of threads : "<<NumberOfThreads<<"\n";
     globalMatA = matA;
@@ -77,6 +79,7 @@ void multiThread(int n, int *matA, int *matB, int *output)
     int rowsPerThread = (N>>1)/NumberOfThreads;
     
     //initialize input to thread
+    //here we assign the rows to each thread on which that thread is going to work
     struct single_thread_Input Input[NumberOfThreads];
     int startRow=0;
     for(int i=0;i<NumberOfThreads;i++,startRow+=rowsPerThread)

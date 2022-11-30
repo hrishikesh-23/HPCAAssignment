@@ -92,21 +92,6 @@ int main(int argc, char *argv[])
             cout << "GPU output: " << output_gpu[i] << ", required output: " << output_reference[i] << "\n";
             exit(0);
         }
-    
-    // cerr << "reference: " << endl;
-    // for(int i=0; i<(N>>1); i++){
-    //   for(int j=0; j<(N>>1); j++){
-    //     cerr << output_reference[i*(N>>1)+j] << "\t";
-    //   }
-    //   cerr << endl;
-    // }
 
-    // cerr << "GPU output: " << endl;
-    // for(int i=0; i<(N>>1); i++){
-    //   for(int j=0; j<(N>>1); j++){
-    //     cerr << output_gpu[i*(N>>1)+j] << "\t";
-    //   }
-    //   cerr << endl;
-    // }
     input_file.close(); 
 }

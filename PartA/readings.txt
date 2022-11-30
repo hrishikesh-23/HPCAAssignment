@@ -1,4 +1,0 @@
-Input matrix of size : 16
-Reference execution time: 0.028000 ms
-Single thread execution time: 0.016000 ms
-Multi thread execution time: 1.068000 ms
